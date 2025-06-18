@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+class First extends StatelessWidget
+{
+  const First({super.key});
 
-
-
-class HelloWorldApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
       appBar: AppBar(
-        title: Text('Hello World'),
-      ),
-      body: Center(
-        child: Text(
-          'Hello World',
+        title: Text('Hello Wolld',
+          textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 30,            // Changing font size
-            color: Colors.blue,      // Changing text color
-            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            backgroundColor: Colors.yellow,
+            fontSize: 40,
+            fontStyle: FontStyle.italic
           ),
         ),
+        centerTitle: true,
       ),
     );
   }
