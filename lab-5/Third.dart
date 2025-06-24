@@ -1,47 +1,58 @@
 import 'package:flutter/material.dart';
 
-
-class Third extends StatefulWidget {
-  @override
-  _ThirdState createState() => _ThirdState();
+void main() {
+  runApp(LoginApp());
 }
 
-class _ThirdState extends State<Third> {
-  final _formKey = GlobalKey<FormState>();
+class LoginApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Login Validation',
+      home: LoginScreen(),
+    );
+  }
+}
 
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void _validateAndLogin() {
+    if (_formKey.currentState!.validate()) {
+      // Proceed with login
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login Successful')),
+      );
+      print('Success');
+    }
+  }
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email is required';
+      return 'Please enter your email';
     }
-
-    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-    if (!emailRegex.hasMatch(value)) {
+    final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailRegExp.hasMatch(value)) {
       return 'Enter a valid email';
     }
-
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Password is required';
-    } else if (value.length < 6) {
+      return 'Please enter your password';
+    }
+    if (value.length < 6) {
       return 'Password must be at least 6 characters';
     }
-
     return null;
-  }
-
-  void _onLoginPressed() {
-    if (_formKey.currentState!.validate()) {
-      // If all validations pass
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login Successful')),
-      );
-    }
   }
 
   @override
@@ -54,26 +65,20 @@ class _ThirdState extends State<Third> {
           key: _formKey,
           child: Column(
             children: [
-              // Email Field
               TextFormField(
                 controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(labelText: 'Email'),
                 validator: _validateEmail,
               ),
-              SizedBox(height: 16),
-
-              // Password Field
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
                 decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
                 validator: _validatePassword,
               ),
-              SizedBox(height: 32),
-
+              SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _onLoginPressed,
+                onPressed: _validateAndLogin,
                 child: Text('Login'),
               ),
             ],
