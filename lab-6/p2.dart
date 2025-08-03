@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const RegistrationApp());
-}
-
-class RegistrationApp extends StatelessWidget {
-  const RegistrationApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: RegistrationScreen(),
-    );
-  }
-}
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -224,3 +210,4 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
+
