@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Login Validation',
-      home: LoginScreen(),
-    );
-  }
-}
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -102,3 +94,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
